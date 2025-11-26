@@ -10,39 +10,16 @@ Display NPO Radio 2 now playing artwork on your Samsung Frame TV as a Home Assis
 - Automatically uploads to Samsung Frame TV
 - Configurable check interval, last.fm API key and Frame TV IP Address
 
-## Installation as Home Assistant Local Addon
-
-### Step 1: Copy Addon to Home Assistant
-
-1. Connect to your Home Assistant instance (via SSH, Samba, or terminal)
-2. Navigate to the addons folder:
-   ```bash
-   cd /addons
-   ```
-3. Create a new folder for this addon:
-   ```bash
-   mkdir top2000-frame-art
-   ```
-4. Copy all files from this project to `/addons/top2000-frame-art/`:
-   - `app.py`
-   - `now_playing.py`
-   - `track_cover.py`
-   - `image_generator.py`
-   - `samsung_frame_upload.py`
-   - `requirements.txt`
-   - `config.json`
-   - `Dockerfile`
-   - `run.sh`
-   - `resources/` folder (with logos and other assets)
-
-### Step 2: Install the Addon
+### Step 1: Add this repository as add-on repository in Home Assistant
 
 1. Open Home Assistant web interface
 2. Navigate to **Settings** → **Add-ons** → **Add-on Store**
-3. Click the menu (three dots) in the top right → **Reload**
-4. Scroll down to the **Local add-ons** section
-5. Click on **Top 2000 Frame Art**
-6. Click **INSTALL**
+3. Click the menu (three dots) in the top right → **Repositories**
+4. Add https://github.com/harmjanr/top2000-frame-art as repository
+
+### Step 2: Install the Addon
+
+The repository should now visible on the add-ons page. Select the add-on and press install
 
 ### Step 3: Configure the Addon
 
@@ -52,14 +29,6 @@ Before starting the addon, configure it:
 2. Set your options:
    - `tv_ip`: IP address of your Samsung Frame TV (e.g., "192.168.1.123")
    - `check_interval`: How often to check for new tracks in seconds (default: 10)
-
-Example configuration:
-```json
-{
-  "tv_ip": "192.168.1.123",
-  "check_interval": 10,
-}
-```
 
 ### Step 4: Start the Addon
 
@@ -77,13 +46,6 @@ Example configuration:
 - Home Assistant OS or Supervised installation
 - Samsung Frame TV on the same network
 - Samsung Frame TV in Art Mode
-
-## Supported Channels
-
-- `npo-radio-2` - NPO Radio 2 (default, for Top 2000)
-- `npo-radio-1` - NPO Radio 1
-- `npo-radio-5` - NPO Radio 5
-- `npo-3fm` - NPO 3FM
 
 ## Troubleshooting
 
