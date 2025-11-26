@@ -1,14 +1,14 @@
 # Top 2000 Frame Art - Home Assistant Addon
 
-Display NPO Radio 2 (or other NPO channels) now playing artwork on your Samsung Frame TV as a Home Assistant addon.
+Display NPO Radio 2 now playing artwork on your Samsung Frame TV as a Home Assistant addon.
 
 ## Features
 
-- Monitors NPO Radio channels for currently playing tracks
+- Monitors NPO Radio 2 for currently playing tracks
 - Fetches album artwork from Last.fm
 - Generates beautiful composite images with station branding
 - Automatically uploads to Samsung Frame TV
-- Configurable check interval and channel selection
+- Configurable check interval, last.fm API key and Frame TV IP Address
 
 ## Installation as Home Assistant Local Addon
 
@@ -50,17 +50,14 @@ Before starting the addon, configure it:
 
 1. Go to the **Configuration** tab
 2. Set your options:
-   - `tv_ip`: IP address of your Samsung Frame TV (e.g., "192.168.2.53")
+   - `tv_ip`: IP address of your Samsung Frame TV (e.g., "192.168.1.123")
    - `check_interval`: How often to check for new tracks in seconds (default: 10)
-   - `channel`: Radio channel to monitor (default: "npo-radio-2")
-     - Options: `npo-radio-2`, `npo-radio-1`, `npo-radio-5`, `npo-3fm`
 
 Example configuration:
 ```json
 {
-  "tv_ip": "192.168.2.53",
+  "tv_ip": "192.168.1.123",
   "check_interval": 10,
-  "channel": "npo-radio-2"
 }
 ```
 
@@ -119,16 +116,6 @@ top2000-frame-art/
 ├── samsung_frame_upload.py  # Samsung Frame TV integration
 ├── requirements.txt     # Python dependencies
 └── resources/           # Logo images and assets
-```
-
-## Development
-
-To test locally without Home Assistant:
-```bash
-export TV_IP="192.168.2.53"
-export CHECK_INTERVAL="10"
-export CHANNEL="npo-radio-2"
-python3 app.py
 ```
 
 ## License
