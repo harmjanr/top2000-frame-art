@@ -1,0 +1,26 @@
+{
+    "name": "Top 2000 Frame Art",
+    "version": "1.0.5",
+    "slug": "top2000-frame-art",
+    "description": "Display NPO Radio 2 now playing artwork on Samsung Frame TV",
+    "arch": [
+        "aarch64",
+        "amd64",
+        "armhf",
+        "armv7",
+        "i386"
+    ],
+    "startup": "application",
+    "boot": "auto",
+    "init": false,
+    "options": {
+        "tv_ip": "",
+        "check_interval": 10,
+        "lastfm_api_key": ""
+    },
+    "schema": {
+        "tv_ip": "str",
+        "check_interval": "int(5,300)?",
+        "lastfm_api_key": "str"
+    }
+}
