@@ -29,6 +29,7 @@ Before starting the addon, configure it:
 2. Set your options:
    - `tv_ip`: IP address of your Samsung Frame TV (e.g., "192.168.1.123")
    - `check_interval`: How often to check for new tracks in seconds (default: 10)
+   - `lastfm_api_key`: Your personal last.fm api key to fetch album cover
 
 ### Step 4: Start the Addon
 
