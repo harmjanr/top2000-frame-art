@@ -65,6 +65,9 @@ Before starting the addon, configure it:
 - Verify the channel name is correct
 - Ensure you have internet connectivity
 
+## Know issues
+- When the radio is not playing a song (commercials, talking), it will show the art of the last song. The API contains an "until" property, but this is unreliable.
+
 ## Project Structure
 
 ```
