@@ -1,4 +1,5 @@
-FROM homeassistant/aarch64-base-python:3.11-alpine3.18
+ARG BUILD_FROM
+FROM ${BUILD_FROM}
 
 # Install required system packages
 RUN apk add --no-cache \
