@@ -24,8 +24,12 @@ async def check_artmode_async(tv_ip):
         await tv.start_listening()
         
         artmode_info = await tv.get_artmode()
-        # The response contains {"value": "on"} or {"value": "off"}
-        is_artmode = artmode_info.get('value') == 'on'
+        # The response can be either a string "on"/"off" or a dict {"value": "on"}
+        if isinstance(artmode_info, dict):
+            is_artmode = artmode_info.get('value') == 'on'
+        else:
+            is_artmode = str(artmode_info).lower() == 'on'
+        
         logging.info(f'Art mode status: {"on" if is_artmode else "off"}')
         return is_artmode
         
