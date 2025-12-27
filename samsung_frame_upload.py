@@ -2,8 +2,12 @@ import asyncio
 import logging
 import os
 import time
+import urllib3
 from samsungtvws.async_art import SamsungTVAsyncArt
 from samsungtvws import exceptions
+
+# Disable SSL warnings for local Samsung TV with self-signed certificate
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 logging.basicConfig(level=logging.INFO)
 
