@@ -8,6 +8,38 @@ from samsungtvws import exceptions
 logging.basicConfig(level=logging.INFO)
 
 
+async def check_artmode_async(tv_ip):
+    """
+    Checks if the Samsung Frame TV is currently in art mode.
+    
+    Args:
+        tv_ip (str): IP address of the Samsung Frame TV
+    
+    Returns:
+        bool: True if TV is in art mode, False otherwise
+    """
+    tv = None
+    try:
+        tv = SamsungTVAsyncArt(host=tv_ip, port=8002)
+        await tv.start_listening()
+        
+        artmode_info = await tv.get_artmode()
+        # The response contains {"value": "on"} or {"value": "off"}
+        is_artmode = artmode_info.get('value') == 'on'
+        logging.info(f'Art mode status: {"on" if is_artmode else "off"}')
+        return is_artmode
+        
+    except Exception as e:
+        logging.error(f'Error checking art mode: {e}')
+        return False
+    finally:
+        if tv:
+            try:
+                await tv.close()
+            except:
+                pass
+
+
 async def upload_to_samsung_frame_async(tv_ip, image_path, matte="none", matte_color="black"):
     """
     Uploads an image to a Samsung Frame TV asynchronously.
@@ -98,6 +130,19 @@ async def upload_to_samsung_frame_async(tv_ip, image_path, matte="none", matte_c
                 await tv.close()
             except:
                 pass
+
+
+def check_artmode(tv_ip):
+    """
+    Synchronous wrapper for checking art mode status.
+    
+    Args:
+        tv_ip (str): IP address of the Samsung Frame TV
+    
+    Returns:
+        bool: True if TV is in art mode, False otherwise
+    """
+    return asyncio.run(check_artmode_async(tv_ip))
 
 
 def upload_to_samsung_frame(tv_ip, image_path, matte="none", matte_color="black"):

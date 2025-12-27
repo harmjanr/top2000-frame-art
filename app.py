@@ -4,7 +4,7 @@ from datetime import datetime
 from now_playing import get_now_playing
 from track_cover import get_track_cover
 from image_generator import create_now_playing_image
-from samsung_frame_upload import upload_to_samsung_frame
+from samsung_frame_upload import upload_to_samsung_frame, check_artmode
 
 # Configuration - read from environment variables (set by Home Assistant addon)
 TV_IP = os.getenv("TV_IP")
@@ -24,6 +24,12 @@ if __name__ == "__main__":
             
             # Only process if it's a new track
             if result.id != last_playing_id:
+                # Check if TV is in art mode before processing
+                if not check_artmode(TV_IP):
+                    print("TV is not in art mode - skipping update")
+                    last_playing_id = result.id
+                    continue
+                
                 cover_url = get_track_cover(result.artist, result.song)
                 if cover_url:                   
                     # Generate the composite image
