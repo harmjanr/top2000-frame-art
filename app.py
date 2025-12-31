@@ -30,7 +30,11 @@ if __name__ == "__main__":
                     last_playing_id = result.id
                     continue
                 
-                cover_url = get_track_cover(result.artist, result.song)
+                # Use cover_url from API if available, otherwise search for it
+                cover_url = result.cover_url
+                if not cover_url:
+                    cover_url = get_track_cover(result.artist, result.song)
+                
                 if cover_url:                   
                     # Generate the composite image
                     output_path = create_now_playing_image(result.artist, result.song, cover_url)

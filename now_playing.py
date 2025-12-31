@@ -4,12 +4,13 @@ import requests
 class NowPlaying:
     """Represents a currently playing track on NPO Radio."""
     
-    def __init__(self, id, song, artist, from_time, until):
+    def __init__(self, id, song, artist, from_time, until, cover_url=None):
         self.id = id
         self.song = song
         self.artist = artist
         self.from_time = from_time
         self.until = until
+        self.cover_url = cover_url
     
     def __repr__(self):
         return f"NowPlaying(id='{self.id}', song='{self.song}', artist='{self.artist}', from='{self.from_time}', until='{self.until}')"
@@ -60,11 +61,19 @@ def get_now_playing(channel="npo-radio-2"):
     # Extract the track data from the nested JSON structure
     track_data = data['data']['result']['playingTrack'][0]
     
+    # Extract cover_url if available
+    cover_url = None
+    if track_data.get('track') and track_data['track'].get('cover_url'):
+        cover_url = track_data['track']['cover_url']
+        # Remove width and height parameters from URL
+        cover_url = cover_url.replace('&width=250&height=250', '')
+    
     return NowPlaying(
         id=track_data['id'],
         song=track_data['song'],
         artist=track_data['artist'],
         from_time=track_data['from'],
-        until=track_data['until']
+        until=track_data['until'],
+        cover_url=cover_url
     )
 
